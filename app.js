@@ -1,5 +1,3 @@
-/* App logic: state, theme, tabs, notes, flashcards, quiz. */
-/* ================= STATE ================= */
 const KEY = "olhum001-review-v1";
 function load(){ try{ const r=localStorage.getItem(KEY); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
 let store = Object.assign({known:{}, best:{}, theme:null}, load());
@@ -15,7 +13,7 @@ const inScope = x => scope==="all" || x.ch===scope;
 const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
 const cc = n => n==="all" ? "" : `--cc:var(--c${n});--ccon:var(--c${n}on)`;
 
-/* ================= THEME ================= */
+
 function effectiveTheme(){
   const t = document.documentElement.getAttribute("data-theme");
   if(t) return t;
@@ -30,7 +28,6 @@ $("#themeBtn").addEventListener("click", ()=>{
   save(); applyTheme();
 });
 
-/* ================= TABS ================= */
 const ICONS = {
   home:'<svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg>',
   notes:'<svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4"/></svg>',
@@ -53,7 +50,7 @@ function go(t, newScope){
   drawTabs(); render(); window.scrollTo(0,0);
 }
 
-/* ================= RENDER ================= */
+
 function render(){
   const v = $("#view");
   if(tab==="home") v.innerHTML = homeHTML();
@@ -73,7 +70,7 @@ $("#view").addEventListener("click", e=>{
   if(s){ scope = s.dataset.scope==="all" ? "all" : Number(s.dataset.scope); if(tab==="cards") buildDeck(); if(tab==="quiz") qz={phase:"setup",count:qz.count||10,list:[],i:0,chosen:null,score:0,missedIdx:[]}; render(); return; }
 });
 
-/* ---------- Home ---------- */
+
 const COMP = {1:"--t1:9%;--h1:40%;--t2:56%;--h2:30%", 2:"--t1:12%;--h1:30%;--t2:48%;--h2:38%", 3:"--t1:8%;--h1:44%;--t2:58%;--h2:28%", 4:"--t1:14%;--h1:34%;--t2:54%;--h2:32%"};
 function chapterStats(n){
   const ids = CARDS.map((c,i)=>[c,i]).filter(([c])=>c.ch===n);
@@ -115,7 +112,7 @@ $("#view").addEventListener("click", e=>{
   }
 });
 
-/* ---------- Notes ---------- */
+
 function entriesHTML(es){
   return `<div class="entries">${es.map(e=>`<div class="entry"><div class="term">${e.term}</div><div class="parts">${
     e.parts.map(([l,t])=>`<div class="part">${(e.parts.length>1 && l)?`<span class="plabel">${l}</span>`:""}<span>${t}</span></div>`).join("")}</div></div>`).join("")}</div>`;
@@ -150,7 +147,7 @@ $("#view").addEventListener("click", e=>{
   }
 });
 
-/* ---------- Flashcards ---------- */
+
 function buildDeck(){
   let ids = CARDS.map((c,i)=>i).filter(i=>inScope(CARDS[i]));
   if(deck.hide) ids = ids.filter(i=>!store.known[i]);
@@ -228,7 +225,7 @@ document.addEventListener("keydown", e=>{
   else if(e.key==="ArrowLeft" && deck.i>0){ deck.i--; drawDeck(true); }
 });
 
-/* ---------- Quiz ---------- */
+
 function poolIdx(){ return QUIZ.map((q,i)=>i).filter(i=>inScope(QUIZ[i])); }
 function startQuiz(idxs){
   const list = shuffle(idxs.slice()).map(i=>{
