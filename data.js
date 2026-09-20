@@ -1,5 +1,4 @@
-/* Study content: edit NOTES, CARDS, and QUIZ here. */
-/* ================= DATA ================= */
+
 const CH = {
   1:{name:"Assumptions and Nature of Arts", sub:"What art is and four assumptions about it"},
   2:{name:"Functions of Art and Philosophy", sub:"Physical, social, personal; Plato to Tolstoy"},
@@ -139,7 +138,7 @@ const TRAPS = [
  "<b>First National Artist = Amorsolo.</b> <b>Father of Philippine independent cinema = Kidlat Tahimik.</b>"
 ];
 
-/* Flashcards: [chapter, front, back] */
+
 const CARDS = [
  [1,"What does “ars” mean?","Skill or ability. It is the Latin root of the word “art.”"],
  [1,"How was art viewed in the Ancient period?","As a specialized skill or craft."],
@@ -212,7 +211,7 @@ const CARDS = [
  [4,"Contemporary Filipino artists named in the module","Ariosto Dale Bagtas, Kathleen Dagum, and Mark Anthony P. Laza."]
 ].map(c=>({ch:c[0],q:c[1],a:c[2]}));
 
-/* Quiz: [chapter, question, CORRECT, [wrong x3], explanation]  (options are shuffled at runtime) */
+
 const QUIZ = [
  [1,"The word “art” comes from the Latin word ars, which means:","Skill or ability",["Beauty","Imitation","Expression"],"Ars means “skill” or “ability.”"],
  [1,"In which century did people begin discussing aesthetics as separate from technical skills?","Seventeenth century",["Eighteenth century","Renaissance period","Medieval period"],"17th century: aesthetics separated from technical skill. The 18th century is when fine arts and useful arts were distinguished."],
